@@ -6,16 +6,17 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
+require("dotenv").config();
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = 2000;
-const JWT_SECRET = 'your_jwt_secret'; // Change this to a strong secret for production
+const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/tododb', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
